@@ -75,18 +75,39 @@ export default function App() {
   const [isHovered, setIsHovered] = useState(false);
 
   useEffect(() => {
-    // Push state immediately on load
-    window.history.pushState(null, "", window.location.href);
+    // Check if we have already redirected to prevent infinite loops
+    const hasRedirected = sessionStorage.getItem("back_redirect_activated");
+    
+    if (hasRedirected) {
+      // If we already redirected, don't trap the user again.
+      // Allow the back button to function normally (exit the site).
+      return;
+    }
 
-    const handlePopState = () => {
+    // Push a dummy state to the history stack
+    // This creates a "buffer" page so when the user clicks back, they hit this buffer
+    // instead of leaving immediately, triggering the popstate event.
+    window.history.pushState({ page: "buffer" }, "", window.location.href);
+
+    const handlePopState = (event: PopStateEvent) => {
+      // Prevent the default back action by redirecting immediately
+      event.preventDefault();
+      
+      // Mark that we have redirected so we don't do it again if they come back
+      sessionStorage.setItem("back_redirect_activated", "true");
+      
+      // Redirect to the offer page
       window.location.href = "https://jornadacrista-suachance.vercel.app/";
     };
 
-    // Also push state on first interaction to ensure mobile browsers register it
+    // Mobile browsers sometimes require user interaction to respect history manipulation
     const primeHistory = () => {
-      window.history.pushState(null, "", window.location.href);
-      window.removeEventListener("touchstart", primeHistory);
-      window.removeEventListener("click", primeHistory);
+        // Ensure the state is pushed if it wasn't already (e.g. some browsers block onload pushState)
+        if (window.history.state?.page !== "buffer") {
+             window.history.pushState({ page: "buffer" }, "", window.location.href);
+        }
+        window.removeEventListener("touchstart", primeHistory);
+        window.removeEventListener("click", primeHistory);
     };
 
     window.addEventListener("popstate", handlePopState);
