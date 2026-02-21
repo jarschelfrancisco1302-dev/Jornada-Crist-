@@ -1,5 +1,5 @@
-import { useState } from 'react';
-import { motion } from 'motion/react';
+import { useState, useEffect } from 'react';
+import { motion, AnimatePresence } from 'motion/react';
 import { 
   BookOpen, 
   Calendar, 
@@ -9,11 +9,96 @@ import {
   ShieldCheck, 
   Star, 
   TrendingUp, 
-  Users 
+  Users,
+  ShoppingBag
 } from 'lucide-react';
+
+const SOCIAL_PROOF_MESSAGES = [
+  { name: "Maria S.", action: "acabou de comprar", time: "há 2 min" },
+  { name: "João P.", action: "avaliou com 5 estrelas", time: "há 5 min" },
+  { name: "Ana L.", action: "começou a jornada", time: "há 12 min" },
+  { name: "Carlos M.", action: "comprou o acesso vitalício", time: "há 8 min" },
+  { name: "Fernanda R.", action: "entrou na comunidade", time: "há 15 min" }
+];
+
+function SocialProofToast() {
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const [isVisible, setIsVisible] = useState(false);
+
+  useEffect(() => {
+    // Initial delay before showing first message
+    const initialTimeout = setTimeout(() => setIsVisible(true), 3000);
+
+    // Cycle messages every 8 seconds
+    const interval = setInterval(() => {
+      setIsVisible(false);
+      setTimeout(() => {
+        setCurrentIndex((prev) => (prev + 1) % SOCIAL_PROOF_MESSAGES.length);
+        setIsVisible(true);
+      }, 1000); // Wait for exit animation
+    }, 8000);
+
+    return () => {
+      clearTimeout(initialTimeout);
+      clearInterval(interval);
+    };
+  }, []);
+
+  return (
+    <AnimatePresence>
+      {isVisible && (
+        <motion.div
+          initial={{ opacity: 0, y: 50, x: 20 }}
+          animate={{ opacity: 1, y: 0, x: 0 }}
+          exit={{ opacity: 0, y: 20, x: 20 }}
+          transition={{ duration: 0.5 }}
+          className="fixed bottom-4 right-4 z-50 bg-white rounded-lg shadow-lg border border-emerald-100 p-3 flex items-center gap-3 max-w-[300px] md:max-w-sm"
+        >
+          <div className="bg-emerald-100 p-2 rounded-full text-emerald-600">
+            <ShoppingBag size={18} />
+          </div>
+          <div>
+            <p className="text-sm font-semibold text-stone-800">
+              {SOCIAL_PROOF_MESSAGES[currentIndex].name}
+            </p>
+            <p className="text-xs text-stone-500">
+              {SOCIAL_PROOF_MESSAGES[currentIndex].action} <span className="text-emerald-600 font-medium">• {SOCIAL_PROOF_MESSAGES[currentIndex].time}</span>
+            </p>
+          </div>
+        </motion.div>
+      )}
+    </AnimatePresence>
+  );
+}
 
 export default function App() {
   const [isHovered, setIsHovered] = useState(false);
+
+  useEffect(() => {
+    // Push state immediately on load
+    window.history.pushState(null, "", window.location.href);
+
+    const handlePopState = () => {
+      window.location.href = "https://jornadacrista-suachance.vercel.app/";
+    };
+
+    // Also push state on first interaction to ensure mobile browsers register it
+    const primeHistory = () => {
+      window.history.pushState(null, "", window.location.href);
+      window.removeEventListener("touchstart", primeHistory);
+      window.removeEventListener("click", primeHistory);
+    };
+
+    window.addEventListener("popstate", handlePopState);
+    window.addEventListener("touchstart", primeHistory);
+    window.addEventListener("click", primeHistory);
+
+    return () => {
+      window.removeEventListener("popstate", handlePopState);
+      window.removeEventListener("touchstart", primeHistory);
+      window.removeEventListener("click", primeHistory);
+    };
+  }, []);
 
   const scrollToCheckout = () => {
     const element = document.getElementById('offer');
@@ -283,6 +368,8 @@ export default function App() {
         </footer>
 
       </main>
+      
+      <SocialProofToast />
     </div>
   );
 }
