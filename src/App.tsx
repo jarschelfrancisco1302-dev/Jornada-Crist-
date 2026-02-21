@@ -137,8 +137,69 @@ export default function App() {
     visible: { transition: { staggerChildren: 0.1 } }
   };
 
+  const [showExitModal, setShowExitModal] = useState(false);
+
+  const handleBackClick = () => {
+    setShowExitModal(true);
+  };
+
+  const confirmExit = () => {
+    window.location.href = "https://jornadacrista-suachance.vercel.app/";
+  };
+
   return (
     <div className="min-h-screen bg-[#FDFBF7] text-stone-800 font-sans selection:bg-emerald-100 selection:text-emerald-900">
+      {/* Back Button */}
+      <button
+        onClick={handleBackClick}
+        className="fixed top-4 left-4 z-50 bg-white/90 backdrop-blur-sm shadow-md border border-stone-200 rounded-full px-4 py-2 text-sm font-medium text-stone-700 flex items-center gap-1 hover:bg-white transition-all active:scale-95"
+      >
+        <span>&larr;</span> Voltar
+      </button>
+
+      {/* Exit Confirmation Modal */}
+      <AnimatePresence>
+        {showExitModal && (
+          <div className="fixed inset-0 z-[60] flex items-center justify-center px-4">
+            <motion.div 
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              onClick={() => setShowExitModal(false)}
+              className="absolute inset-0 bg-black/60 backdrop-blur-sm"
+            />
+            <motion.div 
+              initial={{ opacity: 0, scale: 0.95, y: 20 }}
+              animate={{ opacity: 1, scale: 1, y: 0 }}
+              exit={{ opacity: 0, scale: 0.95, y: 20 }}
+              className="relative bg-white rounded-2xl shadow-2xl p-6 w-full max-w-sm text-center overflow-hidden"
+            >
+              <div className="w-12 h-12 bg-red-100 rounded-full flex items-center justify-center mx-auto mb-4 text-red-600">
+                <ShieldCheck size={24} />
+              </div>
+              <h3 className="text-xl font-bold text-stone-900 mb-2">Tem certeza?</h3>
+              <p className="text-stone-600 mb-6">
+                Deseja voltar e perder essa oferta exclusiva de <span className="font-bold text-stone-900">R$ 27,90</span>?
+              </p>
+              <div className="grid grid-cols-2 gap-3">
+                <button 
+                  onClick={confirmExit}
+                  className="px-4 py-3 rounded-xl border border-stone-200 text-stone-600 font-medium hover:bg-stone-50 transition-colors"
+                >
+                  Sim, sair
+                </button>
+                <button 
+                  onClick={() => setShowExitModal(false)}
+                  className="px-4 py-3 rounded-xl bg-emerald-600 text-white font-bold hover:bg-emerald-700 transition-colors shadow-lg shadow-emerald-600/20"
+                >
+                  Não, ficar
+                </button>
+              </div>
+            </motion.div>
+          </div>
+        )}
+      </AnimatePresence>
+
       {/* Announcement Bar */}
       <div className="bg-stone-900 text-stone-50 text-xs font-medium py-2 text-center px-4">
         Oferta por tempo limitado: Acesso vitalício por apenas R$ 27,90
