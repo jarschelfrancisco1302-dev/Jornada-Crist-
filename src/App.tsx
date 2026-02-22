@@ -121,11 +121,8 @@ export default function App() {
     };
   }, []);
 
-  const scrollToCheckout = () => {
-    const element = document.getElementById('offer');
-    if (element) {
-      element.scrollIntoView({ behavior: 'smooth' });
-    }
+  const handlePurchase = () => {
+    window.location.href = "https://pay.hotmart.com/B104571593W?off=izqd4y1u&checkoutMode=10";
   };
 
   const fadeIn = {
@@ -152,9 +149,9 @@ export default function App() {
       {/* Back Button */}
       <button
         onClick={handleBackClick}
-        className="fixed top-4 left-4 z-50 bg-white/90 backdrop-blur-sm shadow-md border border-stone-200 rounded-full px-4 py-2 text-sm font-medium text-stone-700 flex items-center gap-1 hover:bg-white transition-all active:scale-95"
+        className="fixed top-6 left-6 z-50 bg-white/95 backdrop-blur-md shadow-xl border border-stone-200 rounded-full px-8 py-4 text-xl font-bold text-stone-800 flex items-center gap-2 hover:bg-white transition-all active:scale-95 shadow-emerald-900/10"
       >
-        <span>&larr;</span> Voltar
+        <span className="text-2xl">&larr;</span> Voltar
       </button>
 
       {/* Exit Confirmation Modal */}
@@ -234,7 +231,7 @@ export default function App() {
           </div>
 
           <button 
-            onClick={scrollToCheckout}
+            onClick={handlePurchase}
             className="w-full md:w-auto bg-emerald-600 hover:bg-emerald-700 text-white font-bold py-4 px-10 rounded-xl shadow-lg shadow-emerald-600/20 text-lg transition-all transform hover:-translate-y-1 active:translate-y-0 flex items-center justify-center gap-2"
           >
             QUERO COMEÇAR AGORA
@@ -291,7 +288,7 @@ export default function App() {
           </p>
           
           <button 
-            onClick={scrollToCheckout}
+            onClick={handlePurchase}
             className="w-full md:w-auto bg-emerald-600 hover:bg-emerald-700 text-white font-bold py-4 px-8 rounded-xl shadow-lg shadow-emerald-600/20 transition-all transform hover:-translate-y-1 active:translate-y-0"
           >
             QUERO FORTALECER MINHA FÉ AGORA
@@ -334,7 +331,7 @@ export default function App() {
           </div>
           <div className="text-center mt-8">
             <button 
-              onClick={scrollToCheckout}
+              onClick={handlePurchase}
               className="bg-emerald-600 hover:bg-emerald-700 text-white font-bold py-3 px-6 rounded-xl shadow-md transition-all transform hover:-translate-y-1 active:translate-y-0"
             >
               QUERO FORTALECER MINHA FÉ AGORA
@@ -418,7 +415,10 @@ export default function App() {
             </div>
           </div>
 
-          <button className="w-full bg-emerald-600 hover:bg-emerald-700 text-white font-bold py-5 px-8 rounded-xl shadow-lg shadow-emerald-600/30 text-lg mb-4 transition-all transform hover:-translate-y-1 active:translate-y-0">
+          <button 
+            onClick={handlePurchase}
+            className="w-full bg-emerald-600 hover:bg-emerald-700 text-white font-bold py-5 px-8 rounded-xl shadow-lg shadow-emerald-600/30 text-lg mb-4 transition-all transform hover:-translate-y-1 active:translate-y-0"
+          >
             QUERO FORTALECER MINHA FÉ AGORA
           </button>
           
