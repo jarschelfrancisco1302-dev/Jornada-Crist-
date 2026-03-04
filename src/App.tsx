@@ -97,7 +97,7 @@ export default function App() {
       sessionStorage.setItem("back_redirect_activated", "true");
       
       // Redirect to the offer page
-      window.location.href = "https://pay.kirvano.com/7be1003a-b6fe-429c-86e3-791e73137af4";
+      window.location.href = "https://jornadacrista-suachance.vercel.app/";
     };
 
     // Mobile browsers sometimes require user interaction to respect history manipulation
@@ -141,7 +141,7 @@ export default function App() {
   };
 
   const confirmExit = () => {
-    window.location.href = "https://pay.kirvano.com/7be1003a-b6fe-429c-86e3-791e73137af4";
+    window.location.href = "https://jornadacrista-suachance.vercel.app/";
   };
 
   return (
