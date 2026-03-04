@@ -97,7 +97,7 @@ export default function App() {
       sessionStorage.setItem("back_redirect_activated", "true");
       
       // Redirect to the offer page
-      window.location.href = "https://jornadacrista-suachance.vercel.app/";
+      window.location.href = "https://pay.kirvano.com/7be1003a-b6fe-429c-86e3-791e73137af4";
     };
 
     // Mobile browsers sometimes require user interaction to respect history manipulation
@@ -122,7 +122,7 @@ export default function App() {
   }, []);
 
   const handlePurchase = () => {
-    window.location.href = "https://pay.hotmart.com/B104571593W?off=izqd4y1u&checkoutMode=10";
+    window.location.href = "https://pay.kirvano.com/039f4627-ee54-41b3-85f4-edbf5af717d2";
   };
 
   const fadeIn = {
@@ -141,7 +141,7 @@ export default function App() {
   };
 
   const confirmExit = () => {
-    window.location.href = "https://jornadacrista-suachance.vercel.app/";
+    window.location.href = "https://pay.kirvano.com/7be1003a-b6fe-429c-86e3-791e73137af4";
   };
 
   return (
