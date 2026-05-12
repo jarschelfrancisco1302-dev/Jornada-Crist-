@@ -96,8 +96,16 @@ export default function App() {
       // Mark that we have redirected so we don't do it again if they come back
       sessionStorage.setItem("back_redirect_activated", "true");
       
-      // Redirect to the offer page
-      window.location.href = "https://jornadacrista-suachance.vercel.app/";
+      // Redirect to the offer page using replace to avoid history loops
+      window.location.replace("https://jornadacrista-suachance.vercel.app/");
+    };
+
+    // EXIT-INTENT (Desktop): Detect mouse leaving the viewport from the top
+    const handleMouseLeave = (e: MouseEvent) => {
+      if (e.clientY <= 0) {
+        sessionStorage.setItem("back_redirect_activated", "true");
+        window.location.replace("https://jornadacrista-suachance.vercel.app/");
+      }
     };
 
     // Mobile browsers sometimes require user interaction to respect history manipulation
@@ -113,11 +121,13 @@ export default function App() {
     window.addEventListener("popstate", handlePopState);
     window.addEventListener("touchstart", primeHistory);
     window.addEventListener("click", primeHistory);
+    document.addEventListener("mouseleave", handleMouseLeave);
 
     return () => {
       window.removeEventListener("popstate", handlePopState);
       window.removeEventListener("touchstart", primeHistory);
       window.removeEventListener("click", primeHistory);
+      document.removeEventListener("mouseleave", handleMouseLeave);
     };
   }, []);
 
@@ -141,7 +151,8 @@ export default function App() {
   };
 
   const confirmExit = () => {
-    window.location.href = "https://jornadacrista-suachance.vercel.app/";
+    sessionStorage.setItem("back_redirect_activated", "true");
+    window.location.replace("https://jornadacrista-suachance.vercel.app/");
   };
 
   return (
