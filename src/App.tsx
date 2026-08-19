@@ -132,7 +132,7 @@ export default function App() {
   }, []);
 
   const handlePurchase = () => {
-    window.location.href = "https://pay.kirvano.com/039f4627-ee54-41b3-85f4-edbf5af717d2";
+    window.location.href = "https://pay.kiwify.com.br/Ur46eo4";
   };
 
   const fadeIn = {
