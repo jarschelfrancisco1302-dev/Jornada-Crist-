@@ -156,13 +156,23 @@ export default function App() {
   };
 
   return (
-    <div className="min-h-screen bg-[#FDFBF7] text-stone-800 font-sans selection:bg-emerald-100 selection:text-emerald-900">
+    <div className="min-h-screen relative text-stone-100 font-sans selection:bg-emerald-900 selection:text-emerald-100">
+      {/* Fixed Background Image of Pope Leo XIII */}
+      <div className="fixed inset-0 z-0">
+        <img 
+          src="/src/assets/images/pope_leo_xiii_background_1793108283252.jpg" 
+          alt="Pope Leo XIII Background"
+          className="w-full h-full object-cover"
+        />
+        <div className="absolute inset-0 bg-stone-950/85 backdrop-blur-[2px]"></div>
+      </div>
+
       {/* Back Button */}
       <button
         onClick={handleBackClick}
-        className="fixed top-6 left-6 z-50 bg-white/95 backdrop-blur-md shadow-xl border border-stone-200 rounded-full px-8 py-4 text-xl font-bold text-stone-800 flex items-center gap-2 hover:bg-white transition-all active:scale-95 shadow-emerald-900/10"
+        className="fixed top-4 left-4 z-50 bg-stone-900/80 backdrop-blur-md shadow-2xl border border-stone-700 rounded-full px-5 py-3 text-lg font-bold text-stone-100 flex items-center gap-2 hover:bg-stone-800 transition-all active:scale-95 shadow-emerald-900/20 md:top-6 md:left-6 md:px-8 md:py-4 md:text-xl"
       >
-        <span className="text-2xl">&larr;</span> Voltar
+        <span className="text-xl md:text-2xl">&larr;</span> Voltar
       </button>
 
       {/* Exit Confirmation Modal */}
@@ -174,25 +184,25 @@ export default function App() {
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
               onClick={() => setShowExitModal(false)}
-              className="absolute inset-0 bg-black/60 backdrop-blur-sm"
+              className="absolute inset-0 bg-black/80 backdrop-blur-sm"
             />
             <motion.div 
               initial={{ opacity: 0, scale: 0.95, y: 20 }}
               animate={{ opacity: 1, scale: 1, y: 0 }}
               exit={{ opacity: 0, scale: 0.95, y: 20 }}
-              className="relative bg-white rounded-2xl shadow-2xl p-6 w-full max-w-sm text-center overflow-hidden"
+              className="relative bg-stone-900 rounded-2xl shadow-2xl p-6 w-full max-w-sm text-center border border-stone-700 overflow-hidden"
             >
-              <div className="w-12 h-12 bg-red-100 rounded-full flex items-center justify-center mx-auto mb-4 text-red-600">
+              <div className="w-12 h-12 bg-red-900/30 rounded-full flex items-center justify-center mx-auto mb-4 text-red-500">
                 <ShieldCheck size={24} />
               </div>
-              <h3 className="text-xl font-bold text-stone-900 mb-2">Tem certeza?</h3>
-              <p className="text-stone-600 mb-6">
-                Deseja voltar e perder essa oferta exclusiva de <span className="font-bold text-stone-900">R$ 27,90</span>?
+              <h3 className="text-xl font-bold text-stone-100 mb-2">Tem certeza?</h3>
+              <p className="text-stone-400 mb-6">
+                Deseja voltar e perder essa oferta exclusiva de <span className="font-bold text-white">R$ 27,90</span>?
               </p>
               <div className="grid grid-cols-2 gap-3">
                 <button 
                   onClick={confirmExit}
-                  className="px-4 py-3 rounded-xl border border-stone-200 text-stone-600 font-medium hover:bg-stone-50 transition-colors"
+                  className="px-4 py-3 rounded-xl border border-stone-700 text-stone-400 font-medium hover:bg-stone-800 transition-colors"
                 >
                   Sim, sair
                 </button>
@@ -208,56 +218,68 @@ export default function App() {
         )}
       </AnimatePresence>
 
-      {/* Announcement Bar */}
-      <div className="bg-stone-900 text-stone-50 text-xs font-medium py-2 text-center px-4">
-        Oferta por tempo limitado: Acesso vitalício por apenas R$ 27,90
-      </div>
+      <div className="relative z-10">
+        {/* Announcement Bar */}
+        <div className="bg-emerald-600/20 backdrop-blur-md text-emerald-400 text-xs font-bold py-2 text-center px-4 border-b border-emerald-900/30">
+          OFERTA POR TEMPO LIMITADO: ACESSO VITALÍCIO POR APENAS R$ 27,90
+        </div>
 
-      <main className="max-w-2xl mx-auto px-6 py-12 md:py-16">
-        
-        {/* 1. Headline & Subheadline */}
-        <motion.header 
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true }}
-          variants={fadeIn}
-          className="text-center mb-16 flex flex-col items-center"
-        >
-          <div className="inline-block px-3 py-1 mb-6 text-xs font-bold tracking-wider text-emerald-800 uppercase bg-emerald-100 rounded-full">
-            Para quem busca constância
-          </div>
-          <h1 className="text-4xl md:text-5xl font-extrabold tracking-tight text-stone-900 mb-6 leading-[1.1]">
-            Fortaleça sua fé todos os dias, mesmo com uma rotina corrida.
-          </h1>
-          <p className="text-lg md:text-xl text-stone-600 leading-relaxed mb-8 max-w-lg mx-auto">
-            Organize sua vida espiritual de forma simples e prática.
-          </p>
+        <main className="max-w-2xl mx-auto px-4 py-8 md:px-6 md:py-16">
           
-          <div className="flex flex-col items-center gap-2 mb-8">
-            <div className="bg-white px-6 py-3 rounded-2xl border border-emerald-100 shadow-sm flex items-center gap-3">
-              <span className="text-stone-400 line-through text-sm">De R$ 97,00</span>
-              <span className="text-emerald-600 font-bold text-2xl">Por R$ 27,90</span>
-            </div>
-            <p className="text-xs text-stone-500 font-medium">Pagamento único • Acesso vitalício</p>
-          </div>
-
-          <button 
-            onClick={handlePurchase}
-            className="w-full md:w-auto bg-emerald-600 hover:bg-emerald-700 text-white font-bold py-4 px-10 rounded-xl shadow-lg shadow-emerald-600/20 text-lg transition-all transform hover:-translate-y-1 active:translate-y-0 flex items-center justify-center gap-2"
+          {/* 1. Headline & Subheadline - Pope Centric Hero */}
+          <motion.header 
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+            variants={fadeIn}
+            className="text-center mb-12 md:mb-16 flex flex-col items-center"
           >
-            QUERO COMEÇAR AGORA
-            <TrendingUp size={20} className="stroke-[3px]" />
-          </button>
+            {/* Hero Image - Pope Leo XIII theme */}
+            <div className="mb-8 md:mb-10 relative w-full aspect-[4/3] md:aspect-[16/9] rounded-2xl md:rounded-3xl overflow-hidden shadow-2xl shadow-emerald-900/30 border-2 md:border-4 border-emerald-900/20">
+              <img 
+                src="/src/assets/images/pope_leo_xiii_background_1793108283252.jpg" 
+                alt="Papa Leão XIII - Jornada Cristã"
+                className="w-full h-full object-cover scale-110 translate-y-[-5%] md:translate-y-[-10%]"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-stone-950/80 via-transparent to-transparent"></div>
+              <div className="absolute bottom-4 md:bottom-6 left-0 right-0 px-4 md:px-6">
+                <p className="text-stone-100 text-xs md:text-base italic font-semibold drop-shadow-lg leading-tight">
+                  "A oração é a fonte da nossa força e a âncora da nossa esperança." — Papa Leão XIII
+                </p>
+              </div>
+            </div>
 
-          <div className="mt-12 relative w-full max-w-lg aspect-[4/3] rounded-2xl overflow-hidden shadow-2xl shadow-emerald-900/10">
-            <img 
-              src="https://images.unsplash.com/photo-1504052434569-70ad5836ab65?q=80&w=2070&auto=format&fit=crop" 
-              alt="Pessoa lendo a bíblia em momento de devoção"
-              className="w-full h-full object-cover hover:scale-105 transition-transform duration-700"
-            />
-            <div className="absolute inset-0 bg-gradient-to-t from-stone-900/40 to-transparent pointer-events-none"></div>
-          </div>
-        </motion.header>
+            <div className="inline-block px-3 py-1 mb-5 text-[10px] md:text-xs font-black tracking-[0.2em] text-emerald-400 uppercase bg-emerald-950/50 border border-emerald-900/50 rounded-full">
+              REVOLUÇÃO ESPIRITUAL
+            </div>
+            
+            <h1 className="text-3xl md:text-6xl font-black tracking-tight text-white mb-5 md:mb-6 leading-[1.1] drop-shadow-2xl px-2">
+              Domine sua fé com a <span className="text-emerald-500">sabedoria</span> dos séculos.
+            </h1>
+            
+            <p className="text-base md:text-2xl text-stone-300 leading-relaxed mb-8 max-w-lg mx-auto font-medium px-4">
+              A <span className="text-white font-bold border-b-2 border-emerald-500">Jornada Cristã</span> é o caminho definitivo para a sua constância espiritual diária.
+            </p>
+            
+            <div className="flex flex-col items-center gap-2 mb-8 w-full max-w-[320px] md:max-w-sm">
+              <div className="bg-white/5 backdrop-blur-xl w-full px-4 py-4 md:px-6 md:py-5 rounded-2xl md:rounded-3xl border-2 border-white/10 shadow-2xl flex flex-col items-center gap-1">
+                <span className="text-stone-500 line-through text-[10px] md:text-sm font-bold tracking-widest uppercase">Acesso por R$ 97,00</span>
+                <div className="flex items-baseline gap-2">
+                  <span className="text-stone-300 font-bold text-sm md:text-base uppercase tracking-tighter">HOJE POR</span>
+                  <span className="text-emerald-400 font-black text-3xl md:text-4xl">R$ 27,90</span>
+                </div>
+              </div>
+              <p className="text-[10px] text-emerald-500/80 font-black tracking-widest uppercase animate-pulse mt-2">⚡️ GARANTA SEU LUGAR AGORA</p>
+            </div>
+
+            <button 
+              onClick={handlePurchase}
+              className="w-full md:w-auto bg-emerald-600 hover:bg-emerald-500 text-white font-black py-4 md:py-6 px-10 md:px-14 rounded-xl md:rounded-2xl shadow-[0_0_40px_-5px_rgba(16,185,129,0.4)] text-xl md:text-2xl transition-all transform hover:-translate-y-2 active:translate-y-0 flex items-center justify-center gap-3 border-b-4 border-emerald-800"
+            >
+              QUERO MINHA JORNADA
+              <TrendingUp size={24} className="stroke-[4px]" />
+            </button>
+          </motion.header>
 
         {/* 2. Pain Identification */}
         <motion.section 
@@ -265,9 +287,9 @@ export default function App() {
           whileInView="visible"
           viewport={{ once: true }}
           variants={fadeIn}
-          className="mb-16 bg-white p-8 rounded-2xl shadow-sm border border-stone-100"
+          className="mb-16 bg-stone-900/60 backdrop-blur-md p-8 rounded-2xl shadow-2xl border border-white/5"
         >
-          <h2 className="text-xl font-semibold mb-6 text-center">Você se identifica com isso?</h2>
+          <h2 className="text-xl font-bold mb-6 text-center text-white">Você se identifica com isso?</h2>
           <div className="space-y-4">
             {[
               "Sente que sua leitura bíblica não tem constância?",
@@ -276,10 +298,10 @@ export default function App() {
               "Quer se aproximar de Deus, mas não sabe por onde começar?"
             ].map((pain, index) => (
               <div key={index} className="flex items-start gap-3">
-                <div className="mt-1 min-w-5 min-h-5 flex items-center justify-center rounded-full bg-red-50 text-red-500">
+                <div className="mt-1 min-w-5 min-h-5 flex items-center justify-center rounded-full bg-red-900/30 text-red-400">
                   <span className="text-sm font-bold">✕</span>
                 </div>
-                <p className="text-stone-700">{pain}</p>
+                <p className="text-stone-300 font-medium">{pain}</p>
               </div>
             ))}
           </div>
@@ -291,18 +313,18 @@ export default function App() {
           whileInView="visible"
           viewport={{ once: true }}
           variants={fadeIn}
-          className="text-center mb-16"
+          className="text-center mb-16 px-2"
         >
-          <h2 className="text-2xl font-bold mb-4">Conheça a Jornada Cristã</h2>
-          <p className="text-stone-600 mb-8 leading-relaxed">
-            Não é apenas mais um app. É um guia digital em formato de site mobile, criado especificamente para ajudar você a manter a constância e a organização espiritual diariamente, sem complicações.
+          <h2 className="text-2xl md:text-3xl font-black mb-4 text-white">Conheça a Jornada Cristã</h2>
+          <p className="text-stone-300 mb-8 leading-relaxed text-base md:text-lg">
+            Não é apenas mais um app. É um guia digital de elite, criado para que você domine sua disciplina espiritual e caminhe com os gigantes da fé, todos os dias.
           </p>
           
           <button 
             onClick={handlePurchase}
-            className="w-full md:w-auto bg-emerald-600 hover:bg-emerald-700 text-white font-bold py-4 px-8 rounded-xl shadow-lg shadow-emerald-600/20 transition-all transform hover:-translate-y-1 active:translate-y-0"
+            className="w-full md:w-auto bg-emerald-600 hover:bg-emerald-500 text-white font-bold py-4 px-10 rounded-xl shadow-lg shadow-emerald-600/20 transition-all transform hover:-translate-y-1 active:translate-y-0"
           >
-            QUERO FORTALECER MINHA FÉ AGORA
+            QUERO MINHA VAGA
           </button>
         </motion.section>
 
@@ -314,7 +336,7 @@ export default function App() {
           variants={stagger}
           className="mb-16"
         >
-          <h2 className="text-2xl font-bold text-center mb-10">O que você vai encontrar</h2>
+          <h2 className="text-3xl font-black text-center mb-10 text-white">O que você vai dominar</h2>
           <div className="grid gap-4">
             {[
               { icon: BookOpen, title: "Versículo do dia", desc: "Comece o dia com uma palavra inspiradora." },
@@ -328,22 +350,22 @@ export default function App() {
               <motion.div 
                 key={index}
                 variants={fadeIn}
-                className="flex items-center gap-4 p-4 bg-white rounded-xl border border-stone-100 shadow-sm"
+                className="flex items-center gap-4 p-5 bg-white/5 backdrop-blur-sm rounded-2xl border border-white/5 shadow-xl"
               >
-                <div className="p-3 bg-emerald-50 text-emerald-600 rounded-lg">
+                <div className="p-3 bg-emerald-900/30 text-emerald-400 rounded-xl">
                   <item.icon size={24} />
                 </div>
                 <div>
-                  <h3 className="font-semibold text-stone-900">{item.title}</h3>
-                  <p className="text-sm text-stone-500">{item.desc}</p>
+                  <h3 className="font-bold text-white">{item.title}</h3>
+                  <p className="text-sm text-stone-400 font-medium">{item.desc}</p>
                 </div>
               </motion.div>
             ))}
           </div>
-          <div className="text-center mt-8">
+          <div className="text-center mt-10">
             <button 
               onClick={handlePurchase}
-              className="bg-emerald-600 hover:bg-emerald-700 text-white font-bold py-3 px-6 rounded-xl shadow-md transition-all transform hover:-translate-y-1 active:translate-y-0"
+              className="bg-emerald-600 hover:bg-emerald-500 text-white font-bold py-4 px-8 rounded-xl shadow-md transition-all transform hover:-translate-y-1 active:translate-y-0 border-b-4 border-emerald-800"
             >
               QUERO FORTALECER MINHA FÉ AGORA
             </button>
@@ -381,7 +403,7 @@ export default function App() {
           variants={stagger}
           className="mb-16"
         >
-          <h2 className="text-2xl font-bold text-center mb-10">Quem usa, recomenda</h2>
+          <h2 className="text-3xl font-black text-center mb-10 text-white">Quem usa, recomenda</h2>
           <div className="grid gap-6">
             {[
               { name: "Ana P.", text: "Finalmente consegui manter uma rotina com Deus. O visual do app me motiva a não quebrar a sequência." },
@@ -391,13 +413,13 @@ export default function App() {
               <motion.div 
                 key={index}
                 variants={fadeIn}
-                className="bg-white p-6 rounded-xl border border-stone-100 shadow-sm"
+                className="bg-white/5 backdrop-blur-md p-6 rounded-2xl border border-white/5 shadow-2xl"
               >
-                <div className="flex gap-1 text-yellow-400 mb-3">
+                <div className="flex gap-1 text-yellow-500 mb-3">
                   {[...Array(5)].map((_, i) => <Star key={i} size={16} fill="currentColor" />)}
                 </div>
-                <p className="text-stone-700 italic mb-4">"{testimonial.text}"</p>
-                <p className="text-sm font-bold text-stone-900">- {testimonial.name}</p>
+                <p className="text-stone-300 italic mb-4 font-medium leading-relaxed">"{testimonial.text}"</p>
+                <p className="text-sm font-black text-white">— {testimonial.name}</p>
               </motion.div>
             ))}
           </div>
@@ -410,31 +432,33 @@ export default function App() {
           whileInView="visible"
           viewport={{ once: true }}
           variants={fadeIn}
-          className="mb-16 text-center bg-white p-8 md:p-12 rounded-3xl border-2 border-emerald-100 shadow-xl"
+          className="mb-16 text-center bg-emerald-950/20 backdrop-blur-2xl p-6 md:p-14 rounded-[24px] md:rounded-[32px] border-2 border-emerald-500/30 shadow-2xl relative overflow-hidden"
         >
-          <div className="inline-block px-4 py-1 mb-6 text-sm font-bold text-emerald-700 bg-emerald-50 rounded-full">
+          <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-emerald-500 to-transparent opacity-50"></div>
+          
+          <div className="inline-block px-4 py-1 mb-6 text-[10px] md:text-sm font-black tracking-widest text-emerald-400 bg-emerald-900/50 rounded-full border border-emerald-500/30">
             ACESSO IMEDIATO
           </div>
-          <h2 className="text-3xl font-bold text-stone-900 mb-2">Comece sua Jornada Hoje</h2>
-          <p className="text-stone-500 mb-8">Pagamento único. Sem mensalidades.</p>
+          <h2 className="text-3xl md:text-4xl font-black text-white mb-2">Comece sua Jornada Hoje</h2>
+          <p className="text-stone-400 mb-8 md:mb-10 font-medium text-sm md:text-base">Pagamento único. Sem mensalidades ocultas.</p>
           
-          <div className="flex flex-col items-center justify-center mb-8">
-            <span className="text-stone-400 line-through text-lg">De R$ 97,00</span>
-            <div className="flex items-baseline gap-1">
-              <span className="text-2xl font-bold text-stone-900">Por apenas</span>
-              <span className="text-5xl font-extrabold text-emerald-600">R$ 27,90</span>
+          <div className="flex flex-col items-center justify-center mb-8 md:mb-10">
+            <span className="text-stone-500 line-through text-base md:text-xl font-bold tracking-tighter">De R$ 97,00</span>
+            <div className="flex items-baseline gap-2">
+              <span className="text-lg md:text-2xl font-bold text-stone-300">Por apenas</span>
+              <span className="text-5xl md:text-6xl font-black text-emerald-400 drop-shadow-[0_0_15px_rgba(52,211,153,0.3)]">R$ 27,90</span>
             </div>
           </div>
-
+ 
           <button 
             onClick={handlePurchase}
-            className="w-full bg-emerald-600 hover:bg-emerald-700 text-white font-bold py-5 px-8 rounded-xl shadow-lg shadow-emerald-600/30 text-lg mb-4 transition-all transform hover:-translate-y-1 active:translate-y-0"
+            className="w-full bg-emerald-600 hover:bg-emerald-500 text-white font-black py-5 md:py-6 px-8 rounded-xl md:rounded-2xl shadow-xl shadow-emerald-600/30 text-lg md:text-2xl mb-6 transition-all transform hover:-translate-y-1 active:translate-y-0 border-b-4 border-emerald-800"
           >
-            QUERO FORTALECER MINHA FÉ AGORA
+            QUERO MINHA VAGA AGORA
           </button>
           
-          <p className="text-xs text-stone-400 flex items-center justify-center gap-1">
-            <ShieldCheck size={14} /> Ambiente 100% seguro
+          <p className="text-[10px] md:text-sm text-stone-500 flex items-center justify-center gap-2 font-bold uppercase tracking-wider">
+            <ShieldCheck size={16} className="text-emerald-500" /> Ambiente 100% Blindado
           </p>
         </motion.section>
 
@@ -444,14 +468,14 @@ export default function App() {
           whileInView="visible"
           viewport={{ once: true }}
           variants={fadeIn}
-          className="text-center max-w-md mx-auto mb-16"
+          className="text-center max-w-md mx-auto mb-20 px-4"
         >
-          <div className="w-16 h-16 bg-stone-100 rounded-full flex items-center justify-center mx-auto mb-4 text-stone-900">
-            <ShieldCheck size={32} />
+          <div className="w-16 h-16 md:w-20 md:h-20 bg-stone-900/50 backdrop-blur-md rounded-full flex items-center justify-center mx-auto mb-6 text-emerald-500 border border-white/5 shadow-2xl">
+            <ShieldCheck size={32} md:size={40} />
           </div>
-          <h3 className="font-bold text-lg mb-2">Garantia Incondicional de 7 Dias</h3>
-          <p className="text-stone-600 text-sm">
-            Se você não gostar ou sentir que não é para você, devolvemos 100% do seu dinheiro. Sem perguntas, sem burocracia. O risco é todo nosso.
+          <h3 className="font-black text-xl md:text-2xl mb-3 text-white uppercase tracking-tight">Garantia Real de 7 Dias</h3>
+          <p className="text-stone-400 text-base md:text-lg font-medium leading-relaxed">
+            Sua paz de espírito é inegociável. Se em 7 dias você não sentir uma transformação real, devolvemos 100% do seu investimento. Sem perguntas.
           </p>
         </motion.section>
 
@@ -463,6 +487,7 @@ export default function App() {
       </main>
       
       <SocialProofToast />
+      </div>
     </div>
   );
 }
