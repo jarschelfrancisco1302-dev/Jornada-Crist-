@@ -160,7 +160,7 @@ export default function App() {
       {/* Fixed Background Image of Pope Leo XIII */}
       <div className="fixed inset-0 z-0">
         <img 
-                src="/src/assets/images/pope_leo_xiii_majestic_portrait_1793109212095.jpg" 
+                src="/pope.jpg" 
           alt="Pope Leo XIII Background"
           className="w-full h-full object-cover"
         />
@@ -237,7 +237,7 @@ export default function App() {
             {/* Hero Image - Pope Leo XIII theme */}
             <div className="mb-8 md:mb-10 relative w-full aspect-[4/3] md:aspect-[16/9] rounded-2xl md:rounded-3xl overflow-hidden shadow-2xl shadow-emerald-900/30 border-2 md:border-4 border-emerald-900/20">
               <img 
-                      src="/src/assets/images/pope_leo_xiii_majestic_portrait_1793109212095.jpg" 
+                      src="/pope.jpg" 
                 alt="Papa Leão XIII - Jornada Cristã"
                 className="w-full h-full object-cover scale-110 translate-y-[-5%] md:translate-y-[-10%]"
               />
