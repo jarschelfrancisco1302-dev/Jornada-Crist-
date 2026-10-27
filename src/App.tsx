@@ -234,17 +234,17 @@ export default function App() {
             variants={fadeIn}
             className="text-center mb-10 md:mb-14 flex flex-col items-center"
           >
-            {/* Hero Image - Pope Leo XIII theme */}
-            <div className="mb-8 md:mb-10 relative w-full aspect-[4/3] md:aspect-[16/9] rounded-2xl md:rounded-3xl overflow-hidden shadow-2xl shadow-emerald-900/30 border-2 md:border-4 border-emerald-900/20">
+            {/* Hero Image - Optimized for Widescreen to avoid cropping */}
+            <div className="mb-8 md:mb-10 relative w-full aspect-video rounded-2xl md:rounded-3xl overflow-hidden shadow-2xl shadow-emerald-900/30 border-2 md:border-4 border-emerald-900/20 bg-stone-900">
               <img 
-                      src="/pope.jpg" 
-                alt="Papa Leão XIII - Jornada Cristã"
-                className="w-full h-full object-cover scale-110 translate-y-[-5%] md:translate-y-[-10%]"
+                src="/pope.jpg" 
+                alt="Papa Francisco - Jornada Cristã"
+                className="w-full h-full object-cover object-center"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-stone-950/80 via-transparent to-transparent"></div>
               <div className="absolute bottom-4 md:bottom-6 left-0 right-0 px-4 md:px-6">
                 <p className="text-stone-100 text-xs md:text-base italic font-semibold drop-shadow-lg leading-tight">
-                  "A oração é a fonte da nossa força e a âncora da nossa esperança." — Papa Leão XIII
+                  "Não tenham medo de sonhar coisas grandes." — Papa Francisco
                 </p>
               </div>
             </div>
