@@ -224,7 +224,7 @@ export default function App() {
           OFERTA POR TEMPO LIMITADO: ACESSO VITALÍCIO POR APENAS R$ 27,90
         </div>
 
-        <main className="max-w-2xl mx-auto px-4 py-8 md:px-6 md:py-16">
+        <main className="max-w-2xl mx-auto px-4 py-4 md:px-6 md:py-8">
           
           {/* 1. Headline & Subheadline - Pope Centric Hero */}
           <motion.header 
@@ -232,7 +232,7 @@ export default function App() {
             whileInView="visible"
             viewport={{ once: true }}
             variants={fadeIn}
-            className="text-center mb-12 md:mb-16 flex flex-col items-center"
+            className="text-center mb-10 md:mb-14 flex flex-col items-center"
           >
             {/* Hero Image - Pope Leo XIII theme */}
             <div className="mb-8 md:mb-10 relative w-full aspect-[4/3] md:aspect-[16/9] rounded-2xl md:rounded-3xl overflow-hidden shadow-2xl shadow-emerald-900/30 border-2 md:border-4 border-emerald-900/20">
